@@ -1,0 +1,67 @@
+<template>
+    <lightning-card>
+        <div class="slds-grid slds-wrap slds-p-vertical_small slds-p-horizontal_small">
+            <div class="slds-col slds-large-size_11-of-12 slds-medium-size_11-of-12 slds-size_11-of-12">
+                <lightning-input type="text" placeholder="Add a Comment..." variant = "label-hidden" value={commentBody} onchange={changeBody} class="comment"></lightning-input>
+            </div>
+            <div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+                <lightning-button-icon icon-name="utility:arrowdown"  alternative-text="Add" title="Add" variant="brand" onclick={handleAddComment} class="addButton" style="margin-left:-32px;"></lightning-button-icon>
+            </div>
+        </div>
+        <hr style="margin: 1% 0 0 0;" />
+        <div class="slds-grid slds-wrap slds-p-horizontal_small">
+            <div class="slds-col slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_12-of-12">
+                <template if:true={loading}>
+                <div class="demo-only" style="height:6rem;position:relative;">
+                    <div class="slds-spinner_container">
+                      <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                        <span class="slds-assistive-text">Loading</span>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                      </div>
+                    </div>
+                </div>
+                </template>
+                
+                <template if:true={isCommentAvail}>
+                    <div class="slds-m-vertical_small">
+                    <template for:each={allComments} for:item="comment">
+                        <div style="border-style: solid;border-width:1px; border-color:#dddbda;border-radius:4px;padding:0;" key={comment.Id} class="slds-m-vertical_x-small">
+                        <article class="slds-card">
+                            <div class="slds-card__header slds-grid" style="padding: 0;">
+                              <header class="slds-media slds-media_center slds-has-flexi-truncate" style="background-color:#f3f3f3;padding:0px 5px 0px 0px;border-top-left-radius: 4px;border-top-right-radius: 4px;" >
+                                <div class="slds-media__figure" style="padding-left: 3px;">
+                                    <img src={comment.CreatedBy.SmallPhotoUrl} style="height:35px;width:35px;border-radius:50%;"></img>
+                                </div>
+                                <div class="slds-media__body">
+                                    <lightning-button variant="base" label={comment.CreatedBy.Name} data-id={comment.CreatedById} onclick={handleUserNav}></lightning-button>
+                                    <p style="font-size:0.9em;">{comment.time}</p>
+                                </div>
+                                <div class="slds-no-flex">
+                                    <template if:true={comment.isEdit}>
+                                        <template if:true={comment.isCurrentUser}>
+                                        <lightning-button-menu alternative-text="Edit Options">
+                                            <lightning-menu-item value={comment.Id} label="Edit" onclick={editComment} class="edit" data-com={comment.Comment_Body__c}></lightning-menu-item>
+                                            
+                                            <lightning-menu-item value={comment.Id} label="Delete" onclick={deleteComment} class="del"></lightning-menu-item>
+                                            
+                                        </lightning-button-menu>
+                                        </template>
+                                    </template>
+                                </div>
+                              </header>
+                            </div>
+                            <div class="slds-card__body slds-card__body_inner" style="padding-left:4.5%;">
+                                <p>{comment.Comment_Body__c}</p>
+                            </div>
+                          </article>
+                        </div>
+                    </template>
+                </div>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+    <c-delete-wizard show-del-modal={showDelModal} onclose={closeDelModal} onsave={saveDelChanges} com-id={selectedComId}></c-delete-wizard>
+    <c-edit-wizard show-edit-modal={showEditModal} onclose={closeEditModal} onsave={saveEditChanges} com-id={selectedComId} comment={selectedComment}></c-edit-wizard>
+</template>

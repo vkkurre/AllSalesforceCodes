@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Notes & Attachments">
+        <template for:each={mapData} for:item="map">
+            <div class="slds-col slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-size_6-of-12" key={map.key}>
+                <div class="slds-col slds-size_8-of-12">
+                    <div class="slds-col slds-size_2-of-12" style="display: inline-block;">
+                        <img src={map.link} style="min-width: 30px;max-width: 30px;max-height: 40px;"></img>
+                    </div>
+                    <div class="slds-col slds-size_10-of-12" style="display: inline-block;padding-top: 5px;">
+                        <lightning-button label={map.title} variant="base" data-id={map.key} onclick={previewHandler} data-name={map.title}></lightning-button>
+                        <p>{map.date} <span>&#8226;</span> {map.size} <span>&#8226;</span> {map.extension}</p>
+                    </div>
+                  </div>
+                  <div class="slds-col slds-size_4-of-12">
+                  </div>
+            </div>
+        </template>
+    </lightning-card>
+</template>

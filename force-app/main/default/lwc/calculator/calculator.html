@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title="Calculator">
+        <div class="slds-p-around_medium lgc-bg">
+            <lightning-input name="firstNum" type="text" label="First Number" placeholder="Enter the First Number"></lightning-input>
+        </div>
+        <div class="slds-p-around_medium lgc-bg">
+            <lightning-input name="secondNum" type="text" label="Second Number" placeholder="Enter the Second Number"></lightning-input>
+        </div>
+        <div class="slds-p-around_medium lgc-bg">
+            <lightning-button variant="brand" label="Add" title="Add the two numbers" onclick={handleClickAdd} class="slds-m-left_xx-small"></lightning-button>
+            <lightning-button variant="brand" label="Subtract" title="Subtract the two numbers" onclick={handleClickSub} class="slds-m-left_xx-small"></lightning-button>
+            <lightning-button variant="brand" label="Multiply" title="Multiply the two numbers" onclick={handleClickMul} class="slds-m-left_xx-small"></lightning-button>
+            <lightning-button variant="brand" label="Divide" title="Divide the two numbers" onclick={handleClickDiv} class="slds-m-left_xx-small"></lightning-button>
+            <lightning-button variant="destructive-text" label="Clear" title="Clear" onclick={handleClickClear} class="slds-m-left_xx-small"></lightning-button>
+        </div>
+        <div class="slds-p-around_medium lgc-bg">
+            <template for:each={results} for:item="r">
+                <p key={r.Id}>
+                    Result of {r.fNum} {r.operator} {r.sNum} = {r.result}
+                </p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

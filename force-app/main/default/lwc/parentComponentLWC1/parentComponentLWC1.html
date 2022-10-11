@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title="Contact List">
+        <lightning-layout>
+            <lightning-layout-item>
+                <div class="slds-p-horizontal_small">
+                    <template for:each={contactList} for:item="contact">
+                        <c-child-component-l-w-c1 key={contact.Id} contact={contact} onselected={contactSelected}></c-child-component-l-w-c1>
+                    </template>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item>
+                <div class="slds-p-horizontal_small">
+                    <template if:true={selectedContact}>
+                        <p>{selectedContact.Name}</p>
+                        <p>{selectedContact.Title}</p>
+                        <p><lightning-formatted-phone value={selectedContact.Phone}></lightning-formatted-phone></p>
+                        <p><lightning-formatted-email value={selectedContact.Email}></lightning-formatted-email></p>
+                    </template>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>

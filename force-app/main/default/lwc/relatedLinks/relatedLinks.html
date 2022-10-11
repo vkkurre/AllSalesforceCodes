@@ -1,0 +1,11 @@
+<template>
+    <lightning-card  title="Related Links">
+        <div class="slds-p-horizontal_small">
+            <ul style="list-style-type:none;">
+                <template for:each={mapData} for:item="map">
+                    <li key={map.key}><a href={map.value}>{map.key}</a></li>
+                </template>
+            </ul>
+        </div>
+    </lightning-card>
+</template>

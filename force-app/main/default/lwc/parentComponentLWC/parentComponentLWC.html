@@ -1,0 +1,9 @@
+<template>
+    <lightning-card title="Account Table">
+        <div class="slds-p-horizontal_small">
+        <template for:each={accList} for:item="acc">
+            <c-child-component-l-w-c key={acc.Id} account-item={acc}></c-child-component-l-w-c>
+        </template>
+        </div>
+    </lightning-card>
+</template>

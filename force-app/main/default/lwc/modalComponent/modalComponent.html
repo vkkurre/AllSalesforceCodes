@@ -1,0 +1,27 @@
+<template>
+    <template if:true={showModal}>
+        <div>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={handleCloseButton}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"></lightning-icon>
+                        <span class="slds-assistive-text">Cancel and close</span>
+                    </button>
+                    <slot name="header">
+                        <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Add to Maintenance</h2>
+                    </slot>
+                </header>
+                  <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-textarea name="txtarea" label="Comment" rows="6" placeholder="Type cause for maintenance..." value={comment} onchange={handleChange}></lightning-textarea>
+                  </div>
+                  <div class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={handleCloseButton}>Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={handleSaveButton}>Save</button>
+                  </div>
+                </div>
+              </section>
+              <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </div>
+    </template>
+</template>

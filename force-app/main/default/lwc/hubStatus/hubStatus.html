@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Hub Status">
+        <div class="slds-p-horizontal_small">
+        <lightning-layout multiple-rows="true">
+            <lightning-layout-item size="4">
+                <p>Inactive Bikes</p><lightning-progress-ring size="large" variant="expired" value={val1}></lightning-progress-ring>
+                <p style="display: inline-block;">{total_inactiveBikes}/{totalBikes1}</p>
+            </lightning-layout-item >
+            <lightning-layout-item size="4">
+                <p>Current Bookings</p><lightning-progress-ring size="large" value={val2}></lightning-progress-ring>
+                <p style="display: inline-block;">{total_bookedBikes}/{totalBikes2}</p>
+            </lightning-layout-item>
+            <lightning-layout-item size="4">
+                <p>Maintenance Pending</p><lightning-progress-ring  size="large" variant="warning" value={val3}></lightning-progress-ring>
+                <p style="display: inline-block;">{total_servicebikes}/{totalBikes3}</p>
+            </lightning-layout-item>
+        </lightning-layout>
+        </div>
+    </lightning-card>
+</template>

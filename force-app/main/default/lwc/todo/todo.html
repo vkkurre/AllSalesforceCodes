@@ -1,0 +1,53 @@
+<template>
+    <lightning-card  title="Enter a Task">
+        <lightning-button-icon type="submit" variant="brand-outline" onclick={handleSubmit} alternative-text="Add Task" slot="actions" icon-name="utility:add" title="Add Task"></lightning-button-icon>
+        <div class="slds-p-horizontal_small">
+            <lightning-input class="task" type="text" name="taskName" label="Task Name" value={tName} onchange={handleChange}></lightning-input>
+        </div>
+    </lightning-card>
+    <lightning-card title="To-Do">
+        <template if:true={showList}>
+            <div class="slds-p-horizontal_small slds-grid slds-wrap">
+                <div class="slds-col slds-size_3-of-12">
+                    <ul class="slds-m-around_medium">
+                        <template for:each={taskList} for:item="eachtask">
+                            <li key={eachtask.Id}>{eachtask.Id}.  {eachtask.taskname}</li>
+                        </template>
+                    </ul>
+                </div>
+                <div class="slds-col slds-size_3-of-12">
+                    <ul class="slds-m-around_medium">
+                        <template for:each={taskList} for:item="eachtask" for:index="index">
+                            <li key={eachtask.Id}>
+                                <lightning-input type="checkbox" label="Done" onchange={handleDoneTask} value={eachtask.taskname}></lightning-input>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+        </template>
+        <template if:false={showList}>
+            <div class="slds-p-horizontal_small slds-grid slds-wrap">
+                <p>No Task available</p>
+            </div>
+        </template>
+    </lightning-card>
+    <lightning-card title="Done">
+        <template if:true={doneList}>
+            <div class="slds-p-horizontal_small slds-grid slds-wrap">
+                <div class="slds-col slds-size_3-of-12">
+                    <ul class="slds-m-around_medium">
+                        <template for:each={doneTask} for:item="eachdone">
+                            <li key={eachdone.Id}>{eachdone.Id}.  {eachdone.taskname}</li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+        </template>
+        <template if:false={doneList}>
+            <div class="slds-p-horizontal_small slds-grid slds-wrap">
+                <p>No Tasks Done</p>
+            </div>
+        </template>
+    </lightning-card>
+</template>

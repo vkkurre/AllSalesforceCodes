@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Search Opportunities with Amount">
+        <div class="slds-p-horizontal_small slds-grid slds-wrap">
+            <div class="slds-col slds-size_12-of-12">
+                <lightning-input type="text" placeholder="Enter an Amount" value={amount} onchange={handleChange} ></lightning-input>
+            </div>
+            <div class="slds-col slds-size_12-of-12">
+                <template for:each={oppList} for:item="opp">
+                    <option key={opp.Id}>{opp.Name}</option>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>

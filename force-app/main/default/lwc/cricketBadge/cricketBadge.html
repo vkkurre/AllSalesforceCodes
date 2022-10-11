@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Cricket Badges">
+        <div class="slds-p-horizontal_small">
+            <ul>
+            <template iterator:it={cricketList}>
+                <li key={it.valueId}><lightning-badge class="slds-m-vertical_xxx-small" label={it.value.cName}></lightning-badge></li> 
+            </template>
+            </ul>
+        </div>
+    </lightning-card>
+</template>

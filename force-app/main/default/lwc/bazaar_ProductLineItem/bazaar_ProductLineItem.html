@@ -1,0 +1,25 @@
+<template>
+    <lightning-quick-action-panel header="Add Products">
+        <lightning-layout multiple-rows="true">
+            <lightning-layout-item size="12">
+                <lightning-input type="text" placeholder="Search Products" variant="label-hidden" value={strSearchText} onchange={handleSearchChange}></lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+        <hr />
+        <lightning-layout multiple-rows="true">
+            <lightning-layout-item size="12" >
+                <lightning-datatable
+                key-field="Id"
+                data={list_Products}
+                columns={columns}
+                onclick={handleDataTableClick}>
+        </lightning-datatable>
+            </lightning-layout-item>
+        </lightning-layout>
+        <div slot="footer">
+          <lightning-button variant="destructive-text" title="Close the Modal" label="Cancel" onclick={handleCloseAction} class="slds-m-left_x-small"></lightning-button>
+          <lightning-button variant="brand" label="Select" onclick={handleSelectedProduct} class="slds-m-left_x-small"></lightning-button>
+        </div>
+      </lightning-quick-action-panel>
+      <c-bazaar_-adding-product-line-items bln-selected-products-modal={blnShowProductsModal} list_all-selected-products={list_SelectedProducts} record-id={recordId}></c-bazaar_-adding-product-line-items>
+</template>

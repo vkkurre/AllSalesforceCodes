@@ -1,0 +1,81 @@
+<template>
+    <template if:true={blnSelectedProductsModal}>
+		<div>
+			<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_large">
+				<div class="slds-modal__container">
+					<lightning-button-icon icon-name="utility:close" alternative-text="Close"
+						variant="border-filled" title="Close" onclick={handleCloseButton}
+						class="slds-button slds-button_icon slds-modal__close">
+					</lightning-button-icon>fgdfg
+				  <div class="slds-modal__header">
+					<h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Selected Products</h1>
+				  </div>
+				  <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+					<lightning-layout multiple-rows="true" class="baz-style-background_layout slds-m-vertical_medium">
+						<lightning-layout-item size="3" class="slds-p-around_x-small slds-align_absolute-center">
+							<span>Product Name</span>
+						</lightning-layout-item>
+						<lightning-layout-item size="2" class="slds-p-around_x-small slds-align_absolute-center">
+							<span>Unit Price</span>
+						</lightning-layout-item>
+						<lightning-layout-item size="3" class="slds-p-around_x-small slds-align_absolute-center">
+							Quantity
+						</lightning-layout-item>
+						<lightning-layout-item size="4" class="slds-p-around_x-small slds-align_absolute-center">
+							Total Price
+						</lightning-layout-item>
+					</lightning-layout>
+					<template if:true={list_allSelectedProducts}>
+						<template for:each={list_allSelectedProducts} for:item="product">
+							<div key={product.Id}>
+								<lightning-layout multiple-rows="true">
+									<lightning-layout-item size="3" class="slds-p-around_x-small slds-align_absolute-center">
+										<span>{product.ProductName}</span>
+									</lightning-layout-item>
+									<lightning-layout-item size="2" class="slds-p-around_x-small slds-align_absolute-center">
+										<span><lightning-formatted-number value={product.Unit_Price__c} format-style="currency" currency-code="INR"></lightning-formatted-number></span>
+									</lightning-layout-item>
+									<lightning-layout-item size="4" class="slds-p-horizontal_x-small">
+										<lightning-input value="" class="quantity" required="true" variant="label-hidden" type="number" placeholder="Enter Quantity" data-id={product.Id} onchange={handleChangeQuantity} ></lightning-input>
+									</lightning-layout-item>
+									<lightning-layout-item size="3" class="slds-p-horizontal_x-small">
+										<lightning-input value="" class="totalPrice" required="true" variant="label-hidden" disabled placeholder="Total Price" data-id={product.Id} formatter="currency"></lightning-input>
+									</lightning-layout-item>
+								</lightning-layout>
+							</div>
+						</template>
+					</template>
+					<lightning-layout multiple-rows="false" class="baz-style-background_layout slds-m-vertical_medium" vertical-align="start">
+						<lightning-layout-item size="3" class="slds-p-around_x-small slds-align_absolute-center">
+							<span>Total Amount</span>
+						</lightning-layout-item>
+					</lightning-layout>
+					<lightning-layout multiple-rows="false">
+						<lightning-layout-item size="3" class="slds-p-around_x-small slds-align_absolute-center">
+							
+						</lightning-layout-item>
+						<lightning-layout-item size="2" class="slds-p-around_x-small slds-align_absolute-center">
+							
+						</lightning-layout-item>
+						<lightning-layout-item size="4" class="slds-p-horizontal_x-small slds-align_absolute-center">
+							<span>Total Amount</span>
+						</lightning-layout-item>
+						<lightning-layout-item size="3" class="slds-p-horizontal_x-small">
+							<lightning-input value={doubleTotalAmount} required="true" variant="label-hidden" disabled placeholder="Total Amount" formatter="currency"></lightning-input>
+						</lightning-layout-item>
+					</lightning-layout>
+				  </div>
+				  <div class="slds-modal__footer">
+						<lightning-button variant="brand" label="Save" onclick={handleSaveButton}
+							class="slds-m-left_x-small">
+						</lightning-button>
+						<lightning-button variant="neutral" label="Cancel" onclick={handleCloseButton}
+							class="slds-m-left_x-small">
+						</lightning-button>
+				  </div>
+				</div>
+			  </section>
+			<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+		</div>
+	</template>
+</template>

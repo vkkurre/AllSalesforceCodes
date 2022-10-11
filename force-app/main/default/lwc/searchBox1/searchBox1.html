@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Contact Search">
+        <div class="slds-p-horizontal_small">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_12-of-12">
+                    <lightning-input type="text" placeholder="Search Contacts" value={contactName} onchange={handleChange}></lightning-input>
+                </div>
+                <div class="slds-col slds-size_12-of-12">
+                    <template for:each={contactList} for:item="cl">
+                        <option key={cl.Id}>{cl.Name}</option>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

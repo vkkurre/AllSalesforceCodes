@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Checkbox">
+    <div class="slds-p-around_medium lgc-bg">
+        <lightning-input type="checkbox" label="Checkbox" checked={stat} name="input1" onchange={handleCheckbox}></lightning-input>
+        <template if:true={stat}>
+            <p>Checkbox is Selected.</p>
+        </template>
+        <template if:false={stat}>
+            <p>Checkbox is not Selected.</p>
+        </template>
+    </div>
+    </lightning-card>
+</template>

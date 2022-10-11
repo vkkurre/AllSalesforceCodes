@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Create Contact">
+        <div class="slds-p-horizontal_small">
+            <div class="slds-p-around_small slds-size_2-of-2 lgc-bg">
+                <lightning-input type="text" name="fname" label="First Name" value={formFields.fname} onchange={handleChange}></lightning-input>
+            </div>
+            <div class="slds-p-around_small slds-size_2-of-2 lgc-bg">
+                <lightning-input type="text" name="lname" class="validate" label="Last Name" value={formFields.lname} onchange={handleChange} required></lightning-input>
+            </div>
+            <div class="slds-p-around_small slds-size_2-of-2 lgc-bg">
+                <lightning-input type="email" name="email" class="validate" label="Email" value={formFields.email} onchange={handleChange} required></lightning-input>
+            </div>
+            <div class="slds-p-around_small slds-size_2-of-2 lgc-bg">
+                <lightning-input type="tel" name="phone" class="validate" required pattern="[0-9]{10}$" 
+                message-when-pattern-mismatch="Please enter a valid phone number of 10 digit" label="Phone" value={formFields.phone} onchange={handleChange}></lightning-input>
+            </div>
+            <div class="slds-p-around_small slds-size_2-of-2 lgc-bg">
+                <lightning-input type="date" name="dob" label="Birth Date" value={formFields.dob} onchange={handleChange}></lightning-input>
+            </div>
+            <div class="slds-p-around_small slds-size_2-of-2 lgc-bg">
+                <div class="slds-text-align_center">
+                    <lightning-button class="" variant="brand" name="submit" label="Save" onclick={handleSubmit}></lightning-button>
+                    <lightning-button class="" variant="destructive-text" name="reset" label="Reset" onclick={handleReset}></lightning-button>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

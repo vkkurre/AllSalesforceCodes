@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <assignments>
+        <description>Summation of Total Price of all available product line items.</description>
+        <name>Sum_of_Total_Price</name>
+        <label>Sum of Total Price</label>
+        <locationX>264</locationX>
+        <locationY>551</locationY>
+        <assignmentItems>
+            <assignToReference>TotalPriceOfAllProductLineItems</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Over_All_Product_Line_Items</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Over_All_Product_Line_Items</targetReference>
+        </connector>
+    </assignments>
+    <description>Billing Total Amount After Deletion of Product Line Item.</description>
+    <interviewLabel>Billing Total Amount After Deletion {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Billing Total Amount After Deletion</label>
+    <loops>
+        <description>Looping over each item to calculate total price.</description>
+        <name>Loop_Over_All_Product_Line_Items</name>
+        <label>Loop Over All Product Line Items</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <collectionReference>GetTotalPriceValue</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Sum_of_Total_Price</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Update_Billing_Total_Amount</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Fetching all product line items related to Billing Object Record.</description>
+        <name>Get_All_Product_Line_Items</name>
+        <label>Get All Product Line Items</label>
+        <locationX>176</locationX>
+        <locationY>311</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Over_All_Product_Line_Items</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Billing__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Billing__r.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Product_Line_Item__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Updating Total Amount to be paid from all product line items</description>
+        <name>Update_Billing_Total_Amount</name>
+        <label>Update Billing Total Amount</label>
+        <locationX>176</locationX>
+        <locationY>767</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Billing__r.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Total_Amount__c</field>
+            <value>
+                <elementReference>TotalPriceOfAllProductLineItems</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Billing__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_All_Product_Line_Items</targetReference>
+        </connector>
+        <object>Product_Line_Item__c</object>
+        <recordTriggerType>Delete</recordTriggerType>
+        <triggerType>RecordBeforeDelete</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>GetTotalPriceValue</name>
+        <dataType>Currency</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>2</scale>
+    </variables>
+    <variables>
+        <description>After deleting product line item, It will make summation of total price.</description>
+        <name>TotalPriceOfAllProductLineItems</name>
+        <dataType>Currency</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>2</scale>
+    </variables>
+</Flow>

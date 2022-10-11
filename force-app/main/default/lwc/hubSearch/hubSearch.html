@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="Hub Search(LWC)">
+        <div class="slds-p-horizontal_small">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="7">
+                    <lightning-input class="val" name="hubValue" onchange={handleChange} placeholder="Enter Hub Name" value={hubValue}></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="2" style="padding:2.5% 0 0 0">
+                    <lightning-button class="slds-m-around_medium slds-m-top_x-small" icon-name="utility:search"  name="search" label="Find" variant="brand" onclick={handleClick}></lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item size="3" style="padding:2.5% 0 0 0">
+                    <lightning-button class="slds-m-around_medium slds-m-top_x-small" name="maintainence" label="Add to Maintenance" variant="brand" onclick={handleClickMaintenance}></lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-p-vertical_large" onclick={handleClickDT}>
+                    <template if:true={bikeList}>
+                        <lightning-datatable data={bikeList} columns={columns} key-field="Id" >
+                        </lightning-datatable>
+                    </template>
+                    <template if:true={error}>
+                        {error}
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <c-modal-component show-modal={showModal} onclose={closeModal} onsave={saveChanges}></c-modal-component>
+    </lightning-card>
+</template>
